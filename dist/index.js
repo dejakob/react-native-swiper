@@ -318,7 +318,7 @@ module.exports = _reactNative2.default.createClass({
     var y = 0;
     if (state.dir == 'x') x = diff * state.width;
     if (state.dir == 'y') y = diff * state.height;
-    this.refs.scrollView && this.refs.scrollView.scrollTo(y, x);
+    this.refs.scrollView && this.refs.scrollView._scrollTo(y, x);
 
     // update scroll state
     this.setState({
@@ -532,7 +532,7 @@ module.exports = _reactNative2.default.createClass({
           height: state.height
         }] },
       this.renderScrollView(pages),
-      props.showsPagination && (props.renderPagination ? this.props.renderPagination(state.index, state.total, this) : this.renderPagination()),
+      props.showsPagination && (props._renderPagination ? this.props._renderPagination(state.index, state.total, this) : this.renderPagination()),
       this.renderTitle(),
       this.props.showsButtons && this.renderButtons()
     );

@@ -1,6 +1,9 @@
 /**
  * react-native-swiper
+ * Original creator:
  * @author leecade<leecade@163.com>
+ * Also edited by:
+ * @author dejakob
  */
 import React, {
   STYLEheet,
@@ -13,6 +16,7 @@ import React, {
   Platform
 } from 'react-native';
 import STYLE from './styling/swiper';
+
 
 // Using bare setTimeout, setInterval, setImmediate
 // and requestAnimationFrame calls is very dangerous
@@ -112,7 +116,7 @@ class Swiper extends Component {
     }
 
     componentWillMount () {
-        this.props = this.injectState(this.props);
+        this.props = this._injectState(this.props);
     }
 
     componentWillReceiveProps (props) {
@@ -164,7 +168,7 @@ class Swiper extends Component {
                     : this.state.index == 0)) return this.setState({
                 autoplayEnd: true
             })
-            this.scrollTo(this.props.autoplayDirection ? 1 : -1)
+            this._scrollTo(this.props.autoplayDirection ? 1 : -1)
         }, this.props.autoplayTimeout * 1000)
     }
 
@@ -172,7 +176,7 @@ class Swiper extends Component {
      * Scroll begin handle
      * @param  {object} e native event
      */
-    onScrollBegin (e) {
+    _onScrollBegin (e) {
         // update scroll state
         this.setState({
             isScrolling: true
@@ -187,7 +191,7 @@ class Swiper extends Component {
      * Scroll end handle
      * @param  {object} e native event
      */
-    onScrollEnd (e) {
+    _onScrollEnd (e) {
 
         // update scroll state
         this.setState({
@@ -203,7 +207,7 @@ class Swiper extends Component {
             }
         }
 
-        this.updateIndex(e.nativeEvent.contentOffset, this.state.dir);
+        this._updateIndex(e.nativeEvent.contentOffset, this.state.dir);
 
         // Note: `this.setState` is async, so I call the `onMomentumScrollEnd`
         // in setTimeout to ensure synchronous update `index`
@@ -220,7 +224,7 @@ class Swiper extends Component {
      * @param  {object} offset content offset
      * @param  {string} dir    'x' || 'y'
      */
-    updateIndex (offset, dir) {
+    _updateIndex (offset, dir) {
 
         let state = this.state
         let index = state.index
@@ -255,7 +259,7 @@ class Swiper extends Component {
      * Scroll by index
      * @param  {number} index offset index
      */
-    scrollTo (index) {
+    _scrollTo (index) {
         if (this.state.isScrolling || this.state.total < 2) return
         let state = this.state
         let diff = (this.props.loop ? 1 : 0) + index + this.state.index
@@ -263,7 +267,7 @@ class Swiper extends Component {
         let y = 0
         if(state.dir == 'x') x = diff * state.width
         if(state.dir == 'y') y = diff * state.height
-        this.refs.scrollView && this.refs.scrollView.scrollTo(y, x)
+        this.refs.scrollView && this.refs.scrollView._scrollTo(y, x)
 
         // update scroll state
         this.setState({
@@ -276,7 +280,7 @@ class Swiper extends Component {
      * Render pagination
      * @return {object} react-dom
      */
-    renderPagination () {
+    _renderPagination () {
 
         // By default, dots only show when `total` > 2
         if(this.state.total <= 1) return null
@@ -318,7 +322,11 @@ class Swiper extends Component {
         )
     }
 
-    renderTitle () {
+    /**
+     *
+     * @returns {XML}
+     */
+    _renderTitle () {
         let child = this.props.children[this.state.index]
         let title = child && child.props.title
         return title
@@ -330,7 +338,11 @@ class Swiper extends Component {
             : null
     }
 
-    renderNextButton () {
+    /**
+     *
+     * @returns {XML}
+     */
+    _renderNextButton () {
         let button;
 
         if (this.props.loop || this.state.index != this.state.total - 1) {
@@ -338,7 +350,7 @@ class Swiper extends Component {
         }
 
         return (
-            <TouchableOpacity onPress={() => button !== null && this.scrollTo.call(this, 1)}>
+            <TouchableOpacity onPress={() => button !== null && this._scrollTo.call(this, 1)}>
                 <View>
                     {button}
                 </View>
@@ -346,7 +358,12 @@ class Swiper extends Component {
         )
     }
 
-    renderPrevButton () {
+    /**
+     *
+     * @returns {XML}
+     * @private
+     */
+    _renderPrevButton () {
         let button = null;
 
         if (this.props.loop || this.state.index != 0) {
@@ -354,7 +371,7 @@ class Swiper extends Component {
         }
 
         return (
-            <TouchableOpacity onPress={() => button !== null && this.scrollTo.call(this, -1)}>
+            <TouchableOpacity onPress={() => button !== null && this._scrollTo.call(this, -1)}>
                 <View>
                     {button}
                 </View>
@@ -362,30 +379,41 @@ class Swiper extends Component {
         )
     }
 
-    renderButtons () {
+    /**
+     *
+     * @returns {XML}
+     * @private
+     */
+    _renderButtons () {
         return (
             <View pointerEvents='box-none' style={[STYLE.buttonWrapper, {width: this.state.width, height: this.state.height}, this.props.buttonWrapperStyle]}>
-                {this.renderPrevButton()}
-                {this.renderNextButton()}
+                {this._renderPrevButton()}
+                {this._renderNextButton()}
             </View>
         )
     }
 
-    renderScrollView (pages) {
+    /**
+     *
+     * @param pages
+     * @returns {XML}
+     * @private
+     */
+    _renderScrollView (pages) {
         if (Platform.OS === 'ios')
             return (
                 <ScrollView ref="scrollView"
                     {...this.props}
                             contentContainerStyle={[STYLE.wrapper, this.props.style]}
                             contentOffset={this.state.offset}
-                            onScrollBeginDrag={this.onScrollBegin}
-                            onMomentumScrollEnd={this.onScrollEnd}>
+                            onScrollBeginDrag={this._onScrollBegin}
+                            onMomentumScrollEnd={this._onScrollEnd}>
                     {pages}
                 </ScrollView>
             );
         return (
             <ViewPagerAndroid ref="scrollView"
-                              onPageSelected={this.onScrollEnd}
+                              onPageSelected={this._onScrollEnd}
                               style={{flex: 1}}>
                 {pages}
             </ViewPagerAndroid>
@@ -397,7 +425,7 @@ class Swiper extends Component {
      * @param  {object} props origin props
      * @return {object} props injected props
      */
-    injectState (props) {
+    _injectState (props) {
         /*    const scrollResponders = [
          'onMomentumScrollBegin',
          'onTouchStartCapture',
@@ -459,12 +487,12 @@ class Swiper extends Component {
         width: state.width,
         height: state.height
       }]}>
-                {this.renderScrollView(pages)}
-                {props.showsPagination && (props.renderPagination
-                    ? this.props.renderPagination(state.index, state.total, this)
-                    : this.renderPagination())}
-                {this.renderTitle()}
-                {this.props.showsButtons && this.renderButtons()}
+                {this._renderScrollView(pages)}
+                {props.showsPagination && (props._renderPagination
+                    ? this.props._renderPagination(state.index, state.total, this)
+                    : this._renderPagination())}
+                {this._renderTitle()}
+                {this.props.showsButtons && this._renderButtons()}
             </View>
         )
     }
