@@ -3,7 +3,7 @@
  * @author leecade<leecade@163.com>
  */
 import React, {
-  StyleSheet,
+  STYLEheet,
   Text,
   View,
   ScrollView,
@@ -11,7 +11,8 @@ import React, {
   TouchableOpacity,
   ViewPagerAndroid,
   Platform
-} from 'react-native'
+} from 'react-native';
+import STYLE from './styling/swiper';
 
 // Using bare setTimeout, setInterval, setImmediate
 // and requestAnimationFrame calls is very dangerous
@@ -22,79 +23,6 @@ import TimerMixin from 'react-timer-mixin'
 
 let { width, height } = Dimensions.get('window')
 
-/**
- * Default styles
- * @type {StyleSheetPropType}
- */
-let styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'transparent',
-    position: 'relative',
-  },
-
-  wrapper: {
-    backgroundColor: 'transparent',
-  },
-
-  slide: {
-    backgroundColor: 'transparent',
-  },
-
-  pagination_x: {
-    position: 'absolute',
-    bottom: 25,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'transparent',
-  },
-
-  pagination_y: {
-    position: 'absolute',
-    right: 15,
-    top: 0,
-    bottom: 0,
-    flexDirection: 'column',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'transparent',
-  },
-
-  title: {
-    height: 30,
-    justifyContent: 'center',
-    position: 'absolute',
-    paddingLeft: 10,
-    bottom: -30,
-    left: 0,
-    flexWrap: 'nowrap',
-    width: 250,
-    backgroundColor: 'transparent',
-  },
-
-  buttonWrapper: {
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-
-  buttonText: {
-    fontSize: 50,
-    color: '#007aff',
-    fontFamily: 'Arial',
-  },
-})
 
 // missing `module.exports = exports['default'];` with babel6
 // export default React.createClass({
@@ -367,7 +295,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <View pointerEvents='none' style={[styles['pagination_' + this.state.dir], this.props.paginationStyle]}>
+      <View pointerEvents='none' style={[STYLE['pagination_' + this.state.dir], this.props.paginationStyle]}>
         {dots}
       </View>
     )
@@ -378,7 +306,7 @@ module.exports = React.createClass({
     let title = child && child.props.title
     return title
       ? (
-        <View style={styles.title}>
+        <View style={STYLE.title}>
           {this.props.children[this.state.index].props.title}
         </View>
       )
@@ -389,7 +317,7 @@ module.exports = React.createClass({
     let button;
 
     if (this.props.loop || this.state.index != this.state.total - 1) {
-      button = this.props.nextButton || <Text style={styles.buttonText}>›</Text>
+      button = this.props.nextButton || <Text style={STYLE.buttonText}>›</Text>
     }
 
     return (
@@ -405,7 +333,7 @@ module.exports = React.createClass({
     let button = null
 
     if (this.props.loop || this.state.index != 0) {
-       button = this.props.prevButton || <Text style={styles.buttonText}>‹</Text>
+       button = this.props.prevButton || <Text style={STYLE.buttonText}>‹</Text>
     }
 
     return (
@@ -419,7 +347,7 @@ module.exports = React.createClass({
 
   renderButtons() {
     return (
-      <View pointerEvents='box-none' style={[styles.buttonWrapper, {width: this.state.width, height: this.state.height}, this.props.buttonWrapperStyle]}>
+      <View pointerEvents='box-none' style={[STYLE.buttonWrapper, {width: this.state.width, height: this.state.height}, this.props.buttonWrapperStyle]}>
         {this.renderPrevButton()}
         {this.renderNextButton()}
       </View>
@@ -430,7 +358,7 @@ module.exports = React.createClass({
          return (
             <ScrollView ref="scrollView"
              {...this.props}
-                       contentContainerStyle={[styles.wrapper, this.props.style]}
+                       contentContainerStyle={[STYLE.wrapper, this.props.style]}
                        contentOffset={this.state.offset}
                        onScrollBeginDrag={this.onScrollBegin}
                        onMomentumScrollEnd={this.onScrollEnd}>
@@ -489,7 +417,7 @@ module.exports = React.createClass({
     let key = 0
 
     let pages = []
-    let pageStyle = [{width: state.width, height: state.height}, styles.slide]
+    let pageStyle = [{width: state.width, height: state.height}, STYLE.slide]
 
     // For make infinite at least total > 1
     if(total > 1) {
@@ -508,7 +436,7 @@ module.exports = React.createClass({
     else pages = <View style={pageStyle}>{children}</View>
 
     return (
-      <View style={[styles.container, {
+      <View style={[STYLE.container, {
         width: state.width,
         height: state.height
       }]}>
