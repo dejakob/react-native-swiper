@@ -6,7 +6,8 @@
  * @author dejakob
  */
 import React, {
-  STYLEheet,
+  Component,
+  StyleSheet,
   Text,
   View,
   ScrollView,
@@ -15,7 +16,100 @@ import React, {
   ViewPagerAndroid,
   Platform
 } from 'react-native';
-import STYLE from './styling/swiper';
+
+console.log('index');
+
+const STYLE = StyleSheet.create({
+    container: {
+        backgroundColor: 'transparent',
+        position: 'relative'
+    },
+
+    wrapper: {
+        backgroundColor: 'transparent'
+    },
+
+    slide: {
+        backgroundColor: 'transparent'
+    },
+
+    pagination_x: {
+        position: 'absolute',
+        bottom: 25,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:'transparent'
+    },
+
+    pagination_y: {
+        position: 'absolute',
+        right: 15,
+        top: 0,
+        bottom: 0,
+        flexDirection: 'column',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:'transparent'
+    },
+
+    title: {
+        height: 30,
+        justifyContent: 'center',
+        position: 'absolute',
+        paddingLeft: 10,
+        bottom: -30,
+        left: 0,
+        flexWrap: 'nowrap',
+        width: 250,
+        backgroundColor: 'transparent'
+    },
+
+    buttonWrapper: {
+        backgroundColor: 'transparent',
+        flexDirection: 'row',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        flex: 1,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
+    buttonText: {
+        fontSize: 50,
+        color: '#007aff',
+        fontFamily: 'Arial'
+    },
+
+    dot: {
+        backgroundColor:'rgba(0,0,0,.2)',
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
+    },
+
+    activeDot: {
+        backgroundColor: '#007aff',
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
+    }
+});
 
 
 // Using bare setTimeout, setInterval, setImmediate
@@ -290,6 +384,9 @@ class Swiper extends Component {
             <View style={STYLE.activeDot} />;
         let Dot = this.props.dot ||
             <View style={STYLE.dot} />;
+
+        console.log('IINDEEEXX', this.state.index);
+
         for(let i = 0; i < this.state.total; i++) {
             dots.push(i === this.state.index
                 ?
@@ -319,7 +416,7 @@ class Swiper extends Component {
                 {this.props.children[this.state.index].props.title}
             </View>
         )
-            : null
+            : null;
     }
 
     /**
@@ -438,6 +535,8 @@ class Swiper extends Component {
      * @return {object} react-dom
      */
     render () {
+        console.log('render');
+
         let state = this.state
         let props = this.props
         let children = props.children
@@ -482,4 +581,4 @@ class Swiper extends Component {
     }
 }
 
-export default;
+export default Swiper;

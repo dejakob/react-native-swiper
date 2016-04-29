@@ -1,5 +1,6 @@
-var React = require('react-native')
-var Swiper = require('./index')
+import React from 'react-native';
+import Swiper from './index';
+
 var {
   StyleSheet,
   Text,
@@ -58,5 +59,5 @@ var swiper = React.createClass({
   }
 })
 
-module.exports = swiper
+module.exports = swiper;
 
