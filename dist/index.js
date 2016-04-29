@@ -209,7 +209,7 @@ module.exports = _reactNative2.default.createClass({
   autoplay: function autoplay() {
     var _this = this;
 
-    if (!Array.isArray(this.props.children) || !this.props.autoplay || this.state.isScrolling || this.state.autoplayEnd) return;
+    if (!Array.isArray(this.props.children) || !this.props._autoplay || this.state.isScrolling || this.state.autoplayEnd) return;
 
     clearTimeout(this.autoplayTimer);
 
