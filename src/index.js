@@ -285,27 +285,11 @@ class Swiper extends Component {
         // By default, dots only show when `total` > 2
         if(this.state.total <= 1) return null
 
-        let dots = []
-        let ActiveDot = this.props.activeDot || <View style={{
-            backgroundColor: '#007aff',
-            width: 8,
-            height: 8,
-            borderRadius: 4,
-            marginLeft: 3,
-            marginRight: 3,
-            marginTop: 3,
-            marginBottom: 3,
-          }} />;
-        let Dot = this.props.dot || <View style={{
-            backgroundColor:'rgba(0,0,0,.2)',
-            width: 8,
-            height: 8,
-            borderRadius: 4,
-            marginLeft: 3,
-            marginRight: 3,
-            marginTop: 3,
-            marginBottom: 3,
-          }} />;
+        let dots = [];
+        let ActiveDot = this.props.activeDot ||
+            <View style={STYLE.activeDot} />;
+        let Dot = this.props.dot ||
+            <View style={STYLE.dot} />;
         for(let i = 0; i < this.state.total; i++) {
             dots.push(i === this.state.index
                 ?
