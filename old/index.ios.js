@@ -5,7 +5,7 @@ var {
   AppRegistry,
 } = React
 
-var swiper = require('./examples/basic')
+var swiper = require('./../examples/src/basic')
 // var swiper = require('./examples/swiper')
 // var swiper = require('./examples/swiper_number')
 // var swiper = require('./examples/phone')

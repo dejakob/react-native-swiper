@@ -1,37 +1,36 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- * @flow
  */
+'use strict';
 
-import React, {
+var React = require('react-native');
+var {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
-  View
-} from 'react-native';
+  View,
+} = React;
 
-class examples extends Component {
-  render() {
+var swiper = React.createClass({
+  render: function() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          To get started, edit index.android.js
         </Text>
         <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Shake or press menu button for dev menu
         </Text>
       </View>
     );
   }
-}
+});
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -50,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('examples', () => examples);
+AppRegistry.registerComponent('swiper', () => swiper);

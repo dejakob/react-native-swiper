@@ -1,5 +1,5 @@
 var React = require('react-native')
-var Swiper = require('./')
+var Swiper = require('./index')
 var {
   StyleSheet,
   Text,
@@ -35,26 +35,29 @@ var styles = StyleSheet.create({
 })
 
 var swiper = React.createClass({
-  _onMomentumScrollEnd: function (e, state, context) {
-    // you can get `state` and `this`(ref to swiper's context) from params
-    console.log(state, context.state)
+  getInitialState: function() {
+    return {
+      items: []
+    };
+  },
+  componentDidMount: function() {
+    this.setState({
+      items: [ { title: 'Hello Swiper', css: styles.slide1 }, { title: 'Beautiful', css: styles.slide2 },
+        { title: 'And simple', css: styles.slide3 } ]
+    });
   },
   render: function() {
-    return (
-      <Swiper style={styles.wrapper}
-      onMomentumScrollEnd={this._onMomentumScrollEnd}
-      showsButtons={true}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
+    return(
+      <Swiper showsButtons={true}>
+        {this.state.items.map(function(item){
+          return (
+            <View style={item.css}>
+              <Text style={styles.text}>{item.title}</Text>
+            </View>
+          );
+        })}
       </Swiper>
-    )
+    );
   }
 })
 
