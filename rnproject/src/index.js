@@ -189,9 +189,10 @@ export default React.createClass({
         // update scroll state
         this.setState({
             isScrolling: false
-        })
+        });
 
         // making our events coming from android compatible to updateIndex logic
+        // contentOffset is an iOS thing
         if (!e.nativeEvent.contentOffset) {
             if (this.state.dir == 'x') {
                 e.nativeEvent.contentOffset = {x: e.nativeEvent.position * this.state.width}
@@ -200,12 +201,30 @@ export default React.createClass({
             }
         }
 
-        this.updateIndex(e.nativeEvent.contentOffset || e.nativeEvent.position, this.state.dir)
+        let changedPosition = null;
+
+        if (Platform.OS !== 'ios') {
+            const scrollView = this.refs.scrollView;
+            const currentPage = e.nativeEvent.position;
+            const previousPage = scrollView.props.initialPage;
+
+            if (previousPage === this.state.total && currentPage === this.state.total + 1) {
+                scrollView.setPageWithoutAnimation(1);
+                // changedPosition = 1;
+            }
+            else if (previousPage === 1 && currentPage === 0) {
+                scrollView.setPageWithoutAnimation(this.state.total);
+                // changedPosition = this.state.total;
+            }
+        }
+
+        this.updateIndex(e.nativeEvent.contentOffset || e.nativeEvent.position, this.state.dir);
+
 
         // Note: `this.setState` is async, so I call the `onMomentumScrollEnd`
         // in setTimeout to ensure synchronous update `index`
         this.setTimeout(() => {
-            this.autoplay()
+            this.autoplay();
 
             // if `onMomentumScrollEnd` registered will be called here
             this.props.onMomentumScrollEnd && this.props.onMomentumScrollEnd(e, this.state, this)
@@ -218,8 +237,6 @@ export default React.createClass({
      * @param  {string} dir    'x' || 'y'
      */
     updateIndex(offset, dir) {
-        console.log('update index', offset, dir);
-
         let state = this.state
         let index = state.index
         let diff = offset[dir] - state.offset[dir]
@@ -369,8 +386,6 @@ export default React.createClass({
         )
     },
     renderScrollView(pages) {
-        console.log('render scroll view', pages, this.state.offset, this.state);
-
         if (Platform.OS === 'ios')
             return (
                 <ScrollView ref="scrollView"
@@ -385,9 +400,6 @@ export default React.createClass({
 
         const initialPage = this.state.offset[this.state.dir] /
             ((this.state.dir === 'x') ? this.state.width : this.state.height);
-
-        console.log('initial page', this.state.offset[this.state.dir], this.state.width, initialPage);
-
 
         return (
             <ViewPagerAndroid ref="scrollView"
