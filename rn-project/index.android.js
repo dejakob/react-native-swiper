@@ -11,6 +11,6 @@ import React, {
   View
 } from 'react-native';
 
-var swiper = require('./../examples/src/basic')
+var swiper = require('./src/examples/basic');
 
 AppRegistry.registerComponent('examples', () => swiper);

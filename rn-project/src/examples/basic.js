@@ -1,5 +1,5 @@
 import React from 'react-native';
-import Swiper from './index';
+import Swiper from './../index';
 
 var {
   StyleSheet,

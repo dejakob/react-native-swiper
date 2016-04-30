@@ -1,5 +1,5 @@
 var React = require('react-native')
-var Swiper = require('./index')
+var Swiper = require('./../index')
 var {
   StyleSheet,
   Text,
