@@ -4,6 +4,7 @@
  */
 import React, {
     StyleSheet,
+    Component,
     Text,
     View,
     ScrollView,
@@ -11,7 +12,8 @@ import React, {
     TouchableOpacity,
     ViewPagerAndroid,
     Platform
-} from 'react-native'
+} from 'react-native';
+import STYLE from './style/swiper';
 
 // Using bare setTimeout, setInterval, setImmediate
 // and requestAnimationFrame calls is very dangerous
@@ -26,75 +28,8 @@ let { width, height } = Dimensions.get('window')
  * Default styles
  * @type {StyleSheetPropType}
  */
-let styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'transparent',
-        position: 'relative',
-    },
+let styles = STYLE;
 
-    wrapper: {
-        backgroundColor: 'transparent',
-    },
-
-    slide: {
-        backgroundColor: 'transparent',
-    },
-
-    pagination_x: {
-        position: 'absolute',
-        bottom: 25,
-        left: 0,
-        right: 0,
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:'transparent',
-    },
-
-    pagination_y: {
-        position: 'absolute',
-        right: 15,
-        top: 0,
-        bottom: 0,
-        flexDirection: 'column',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:'transparent',
-    },
-
-    title: {
-        height: 30,
-        justifyContent: 'center',
-        position: 'absolute',
-        paddingLeft: 10,
-        bottom: -30,
-        left: 0,
-        flexWrap: 'nowrap',
-        width: 250,
-        backgroundColor: 'transparent',
-    },
-
-    buttonWrapper: {
-        backgroundColor: 'transparent',
-        flexDirection: 'row',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        flex: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
-
-    buttonText: {
-        fontSize: 50,
-        color: '#007aff',
-        fontFamily: 'Arial',
-    },
-})
 
 // missing `module.exports = exports['default'];` with babel6
 // export default React.createClass({
@@ -179,6 +114,8 @@ export default React.createClass({
     },
 
     initState(props) {
+        console.log('init state', props);
+
         let initState = {
             isScrolling: false,
             autoplayEnd: false,
@@ -240,7 +177,7 @@ export default React.createClass({
     },
 
     onScroll (e) {
-        console.log('on scroll', e.nativeEvent);
+        // console.log('on scroll', e.nativeEvent);
     },
 
     /**
@@ -281,6 +218,8 @@ export default React.createClass({
      * @param  {string} dir    'x' || 'y'
      */
     updateIndex(offset, dir) {
+        console.log('update index', offset, dir);
+
         let state = this.state
         let index = state.index
         let diff = offset[dir] - state.offset[dir]
@@ -430,6 +369,8 @@ export default React.createClass({
         )
     },
     renderScrollView(pages) {
+        console.log('render scroll view', pages, this.state.offset, this.state);
+
         if (Platform.OS === 'ios')
             return (
                 <ScrollView ref="scrollView"
@@ -441,8 +382,16 @@ export default React.createClass({
                     {pages}
                 </ScrollView>
             );
+
+        const initialPage = this.state.offset[this.state.dir] /
+            ((this.state.dir === 'x') ? this.state.width : this.state.height);
+
+        console.log('initial page', this.state.offset[this.state.dir], this.state.width, initialPage);
+
+
         return (
             <ViewPagerAndroid ref="scrollView"
+                              initialPage={initialPage}
                               onPageScroll={this.onScroll}
                               onPageSelected={this.onScrollEnd}
                               style={{flex: 1}}>
@@ -456,6 +405,8 @@ export default React.createClass({
      * @return {object} props injected props
      */
     injectState(props) {
+        console.log('inject state', props);
+
         /*    const scrollResponders = [
          'onMomentumScrollBegin',
          'onTouchStartCapture',

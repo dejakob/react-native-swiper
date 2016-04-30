@@ -44,15 +44,15 @@ var swiper = React.createClass({
     return (
       <Swiper style={styles.wrapper}
       onMomentumScrollEnd={this._onMomentumScrollEnd}
-      showsButtons={true}>
+      showsButtons={false}>
         <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
+          <Text style={styles.text}>Slide 1</Text>
         </View>
         <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
+          <Text style={styles.text}>Slide 2</Text>
         </View>
         <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
+          <Text style={styles.text}>Slide 3</Text>
         </View>
       </Swiper>
     )
