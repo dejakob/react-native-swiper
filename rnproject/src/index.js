@@ -209,12 +209,10 @@ export default React.createClass({
             const previousPage = scrollView.props.initialPage;
 
             if (previousPage === this.state.total && currentPage === this.state.total + 1) {
-                scrollView.setPageWithoutAnimation(1);
-                // changedPosition = 1;
+                this.setTimeout(() => scrollView.setPageWithoutAnimation(1));
             }
             else if (previousPage === 1 && currentPage === 0) {
-                scrollView.setPageWithoutAnimation(this.state.total);
-                // changedPosition = this.state.total;
+                this.setTimeout(() => scrollView.setPageWithoutAnimation(this.state.total));
             }
         }
 
