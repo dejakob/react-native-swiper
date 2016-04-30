@@ -1,3 +1,3 @@
-import Swiper from '../examples/src/index';
+import Swiper from '../rn-project/src/index';
 
 export default Swiper;
