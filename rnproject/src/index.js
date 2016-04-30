@@ -114,8 +114,6 @@ export default React.createClass({
     },
 
     initState(props) {
-        console.log('init state', props);
-
         let initState = {
             isScrolling: false,
             autoplayEnd: false,
@@ -177,7 +175,19 @@ export default React.createClass({
     },
 
     onScroll (e) {
-        // console.log('on scroll', e.nativeEvent);
+        if (Platform.OS === 'ios') {
+
+        }
+        else {
+            const newPosition = e.nativeEvent.position + Math.round(e.nativeEvent.offset);
+            let newIndex = (newPosition - 1) % this.state.total;
+
+            if (newIndex < 0) {
+                newIndex += this.state.total;
+            }
+
+            this.setState({ index: newIndex });
+        }
     },
 
     /**
@@ -201,9 +211,9 @@ export default React.createClass({
             }
         }
 
-        let changedPosition = null;
-
-        if (Platform.OS !== 'ios') {
+        if (Platform.OS === 'ios') {
+        }
+        else {
             const scrollView = this.refs.scrollView;
             const currentPage = e.nativeEvent.position;
             const previousPage = scrollView.props.initialPage;
@@ -415,8 +425,6 @@ export default React.createClass({
      * @return {object} props injected props
      */
     injectState(props) {
-        console.log('inject state', props);
-
         /*    const scrollResponders = [
          'onMomentumScrollBegin',
          'onTouchStartCapture',
