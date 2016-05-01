@@ -32,4 +32,4 @@ import Carousel from 'tsjing-carousel';
 * Infinite paging (loop)
 * Unit tests
 
-![Tsjing logo](http://raw.githubusercontent.com/dejakob/tsjing-carousel/master/tsjing-logo.png)
+![Tsjing logo](./tsjing-logo.png)
