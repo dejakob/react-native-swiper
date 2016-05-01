@@ -1,7 +1,5 @@
 import React from 'react-native';
-import AndroidSwiper from '../swiper/swiper.android';
-
-console.log('android swiper', AndroidSwiper);
+import Swiper from '../swiper/swiper';
 
 var {
   StyleSheet,
@@ -40,7 +38,7 @@ var styles = StyleSheet.create({
 var swiper = React.createClass({
   render: function() {
     return (
-      <AndroidSwiper
+      <Swiper
           style={styles.wrapper}
           showsButtons={false}
           autoPlay={true}
@@ -57,7 +55,7 @@ var swiper = React.createClass({
               <Text style={styles.text}>Slide 3</Text>
               </View>
           ]}
-      </AndroidSwiper>
+      </Swiper>
     )
   }
 })
