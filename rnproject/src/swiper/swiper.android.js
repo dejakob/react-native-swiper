@@ -7,6 +7,10 @@ const KEYBOARD_DISMISS_MODE_ON_DRAG = 'on-drag';
 const PAGINATION_DIRECTION_HORIZONTAL = 'x';
 const PAGINATION_DIRECTION_VERTICAL = 'y';
 
+const DRAGGING_STATE_IDLE = 'idle';
+const DRAGGING_STATE_DRAGGING = 'dragging';
+const DRAGGING_STATE_SETTLING = 'setting';
+
 /**
  * @Todo vertical android swiper
  * @source http://stackoverflow.com/questions/13477820/android-vertical-viewpager
@@ -20,6 +24,7 @@ class Swiper extends Component
         this.state = {
             index: 0,
             paginationDirection: PAGINATION_DIRECTION_HORIZONTAL,
+            draggingState: DRAGGING_STATE_IDLE,
             width,
             height
         };
@@ -54,16 +59,18 @@ class Swiper extends Component
      * @private
      */
     _onPageScroll (eventData) {
-
+        // console.log('page scroll', eventData);
     }
 
     /**
      *
-     * @param {Object} eventData
+     * @param {String} state
      * @private
      */
-    _onPageScrollStateChanged (eventData) {
-
+    _onPageScrollStateChanged (state) {
+        this.setState({
+            draggingState: state
+        });
     }
 
     /**
@@ -72,7 +79,7 @@ class Swiper extends Component
      * @private
      */
     _onPageSelected (eventData) {
-
+        console.log('page selected', eventData);
     }
 
     /**
@@ -171,7 +178,7 @@ class Swiper extends Component
                 >
                     {this.props.children.map(this._renderPage.bind(this))}
                 </ViewPagerAndroid>
-                
+
                 {this._renderDots()}
             </View>
         );
