@@ -32,5 +32,6 @@ import Carousel from 'tsjing-carousel';
 * Infinite paging (loop)
 * Unit tests
 
-
-![Tsjing logo](http://github.com/dejakob/tsjing-carousel/raw/master/src//tsjing-logo.svg)
+<div style="background-color: #666666; padding: 10px;">
+![Tsjing logo](http://raw.githubusercontent.com/dejakob/tsjing-carousel/master/tsjing-logo.svg)
+</div>
