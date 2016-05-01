@@ -101,7 +101,7 @@ class Swiper extends Component
 
     _startAutoPlay (timeout) {
         if (this._autoPlayInterval === null) {
-            setInterval(() => {
+            this._autoPlayInterval = setInterval(() => {
                 if (this.state.draggingState !== DRAGGING_STATE_DRAGGING) {
                     this.refs.viewPager.setPage((this.state.index + 1) % this.props.children.length);
                 }
