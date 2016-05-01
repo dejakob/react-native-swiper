@@ -68,4 +68,9 @@ export default StyleSheet.create({
         color: '#007aff',
         fontFamily: 'Arial',
     },
+
+    viewPager: {
+        flex: 1,
+        backgroundColor: '#ff0000'
+    }
 });
