@@ -50,7 +50,7 @@ export default StyleSheet.create({
     },
 
     activeDot: {
-        backgroundColor: '#007aff',
+        backgroundColor: '#ffffff',
         width: 8,
         height: 8,
         borderRadius: 4,

@@ -30,7 +30,9 @@ class Swiper extends Component
             // dotsStyle
             dotsStyle: React.PropTypes.object,
             dotStyle: React.PropTypes.object,
-            activeDotStyle: React.PropTypes.object
+            activeDotStyle: React.PropTypes.object,
+
+            autoPlay: React.PropTypes.bool
         }
     }
 
@@ -38,10 +40,12 @@ class Swiper extends Component
         super();
 
         const { width, height } = Dimensions.get('window');
+        this._autoPlayInterval = null;
         this.state = {
             index: 0,
             paginationDirection: PAGINATION_DIRECTION_HORIZONTAL,
             draggingState: DRAGGING_STATE_IDLE,
+            autoPlay: false,
             width,
             height
         };
@@ -77,6 +81,14 @@ class Swiper extends Component
 
         if (typeof props.height === 'number') {
             newState.height = props.height;
+        }
+
+        if (typeof props.autoPlay === 'boolean') {
+            newState.autoPlay = props.autoPlay;
+
+            if (props.autoPlay === true) {
+                this._startAutoPlay();
+            }
         }
 
         this.setState(newState);
@@ -183,7 +195,7 @@ class Swiper extends Component
     }
 
     /**
-     * 
+     *
      * @param page
      * @param index
      * @returns {XML}
