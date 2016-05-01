@@ -14,6 +14,7 @@ const DRAGGING_STATE_SETTLING = 'setting';
 /**
  * @Todo vertical android swiper
  * @source http://stackoverflow.com/questions/13477820/android-vertical-viewpager
+ * @Todo infinite pages
  */
 class Swiper extends Component
 {
