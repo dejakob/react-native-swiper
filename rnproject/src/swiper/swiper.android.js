@@ -1,11 +1,15 @@
-import React, { Component, View, ViewPagerAndroid, Dimensions } from 'react-native';
+import React, { Component, View, ViewPagerAndroid, Text, Dimensions } from 'react-native';
 import STYLE from '../style/swiper';
 
 const KEYBOARD_DISMISS_MODE_NONE = 'none';
 const KEYBOARD_DISMISS_MODE_ON_DRAG = 'on-drag';
 
+const PAGINATION_DIRECTION_HORIZONTAL = 'x';
+const PAGINATION_DIRECTION_VERTICAL = 'y';
+
 /**
- *
+ * @Todo vertical android swiper
+ * @source http://stackoverflow.com/questions/13477820/android-vertical-viewpager
  */
 class Swiper extends Component
 {
@@ -14,7 +18,8 @@ class Swiper extends Component
 
         const { width, height } = Dimensions.get('window');
         this.state = {
-            initialPage: 0,
+            index: 0,
+            paginationDirection: PAGINATION_DIRECTION_HORIZONTAL,
             width,
             height
         };
@@ -78,8 +83,6 @@ class Swiper extends Component
      * @private
      */
     _renderPage (page, index) {
-        console.log('render page', page);
-
         const pageStyle = [{ width: this.state.width, height: this.state.height }, STYLE.slide];
 
         return (
@@ -93,6 +96,61 @@ class Swiper extends Component
         );
     }
 
+    _renderDots () {
+        let style = {
+            position: 'absolute',
+            bottom: 25,
+            left: 0,
+            right: 0,
+            flexDirection: 'row',
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor:'transparent'
+        };
+
+        if (this.state.paginationDirection === PAGINATION_DIRECTION_VERTICAL) {
+            style = {
+                position: 'absolute',
+                right: 15,
+                top: 0,
+                bottom: 0,
+                flexDirection: 'column',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor:'transparent'
+            };
+        }
+
+        return (
+            <View
+                pointerEvents="none"
+                style={style}
+            >
+                {this.props.children.map(this._renderDot.bind(this))}
+            </View>
+        );
+    }
+
+    _renderDot (page, index) {
+        if (this.state.index === index) {
+            return (
+                <View
+                    key={index}
+                    style={STYLE.activeDot}
+                />
+            );
+        }
+
+        return (
+            <View
+                key={index}
+                style={STYLE.dot}
+            />
+        );
+    }
+
     /**
      * Render the Swiper
      * @returns {XML}
@@ -103,7 +161,7 @@ class Swiper extends Component
                 style={[STYLE.container, { width: this.state.width, height: this.state.height }]}
             >
                 <ViewPagerAndroid
-                    initialPage={this.state.initialPage}
+                    initialPage={this.state.index}
                     ref="viewPager"
                     keyboardDismissMode={KEYBOARD_DISMISS_MODE_NONE}
                     onPageScroll={this._onPageScroll.bind(this)}
@@ -113,8 +171,11 @@ class Swiper extends Component
                 >
                     {this.props.children.map(this._renderPage.bind(this))}
                 </ViewPagerAndroid>
+                
+                {this._renderDots()}
             </View>
         );
+
     }
 }
 

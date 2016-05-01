@@ -14,30 +14,6 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
     },
 
-    pagination_x: {
-        position: 'absolute',
-        bottom: 25,
-        left: 0,
-        right: 0,
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:'transparent',
-    },
-
-    pagination_y: {
-        position: 'absolute',
-        right: 15,
-        top: 0,
-        bottom: 0,
-        flexDirection: 'column',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor:'transparent',
-    },
-
     title: {
         height: 30,
         justifyContent: 'center',
@@ -70,7 +46,27 @@ export default StyleSheet.create({
     },
 
     viewPager: {
-        flex: 1,
-        backgroundColor: '#ff0000'
+        flex: 1
+    },
+
+    activeDot: {
+        backgroundColor: '#007aff',
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
+    },
+    dot: {
+        backgroundColor:'rgba(0,0,0,.2)',
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginLeft: 3,
+        marginRight: 3,
+        marginTop: 3,
+        marginBottom: 3
     }
 });
