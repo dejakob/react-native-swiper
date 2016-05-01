@@ -25,7 +25,12 @@ class Swiper extends Component
             onPageChangeDone: React.PropTypes.func,
 
             dotsHeader: React.PropTypes.object,
-            dotsFooter: React.PropTypes.object
+            dotsFooter: React.PropTypes.object,
+
+            // dotsStyle
+            dotsStyle: React.PropTypes.object,
+            dotStyle: React.PropTypes.object,
+            activeDotStyle: React.PropTypes.object
         }
     }
 
@@ -111,7 +116,9 @@ class Swiper extends Component
      * @private
      */
     _onPageSelected (eventData) {
-        this.props.onPageChangeDone(this.state.index);
+        if (typeof this.props.onPageChangeDone === 'function') {
+            this.props.onPageChangeDone(this.state.index);
+        }
     }
 
     /**
@@ -135,6 +142,11 @@ class Swiper extends Component
         );
     }
 
+    /**
+     *
+     * @returns {XML}
+     * @private
+     */
     _renderDots () {
         const style = {
             position: 'absolute',
@@ -162,7 +174,7 @@ class Swiper extends Component
                 style={style}
             >
                 {this.props.dotsHeader}
-                <View style={navStyle}>
+                <View style={this.props.dotsStyle || navStyle}>
                     {this.props.children.map(this._renderDot.bind(this))}
                 </View>
                 {this.props.dotsFooter}
@@ -170,12 +182,19 @@ class Swiper extends Component
         );
     }
 
+    /**
+     * 
+     * @param page
+     * @param index
+     * @returns {XML}
+     * @private
+     */
     _renderDot (page, index) {
         if (this.state.index === index) {
             return (
                 <View
                     key={index}
-                    style={STYLE.activeDot}
+                    style={this.props.activeDotStyle || STYLE.activeDot}
                 />
             );
         }
@@ -183,7 +202,7 @@ class Swiper extends Component
         return (
             <View
                 key={index}
-                style={STYLE.dot}
+                style={this.props.dotStyle || STYLE.dot}
             />
         );
     }
