@@ -32,7 +32,8 @@ class Swiper extends Component
             dotStyle: React.PropTypes.object,
             activeDotStyle: React.PropTypes.object,
 
-            autoPlay: React.PropTypes.bool
+            autoPlay: React.PropTypes.bool,
+            autoPlayTimeout: React.PropTypes.number
         }
     }
 
@@ -87,11 +88,33 @@ class Swiper extends Component
             newState.autoPlay = props.autoPlay;
 
             if (props.autoPlay === true) {
-                this._startAutoPlay();
+                this._startAutoPlay(this.props.autoPlayTimeout || 2000);
+            }
+            else {
+                this._stopAutoPlay();
             }
         }
 
         this.setState(newState);
+    }
+
+    _startAutoPlay (timeout) {
+        if (this._autoPlayInterval === null) {
+            setInterval(() => {
+                if (this.state.draggingState !== DRAGGING_STATE_DRAGGING) {
+                    this.refs.viewPager.setPage((this.state.index + 1) % this.props.children.length);
+                }
+                console.log('TICK', (this.state.index + 1) % this.props.children.length);
+            }, timeout);
+        }
+    }
+
+    _stopAutoPlay () {
+        if (this._autoPlayInterval !== null) {
+            clearInterval(this._autoPlayInterval);
+        }
+
+        this._autoPlayInterval = null;
     }
 
     /**

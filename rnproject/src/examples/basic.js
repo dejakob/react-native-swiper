@@ -43,6 +43,8 @@ var swiper = React.createClass({
       <AndroidSwiper
           style={styles.wrapper}
           showsButtons={false}
+          autoPlay={true}
+          autoPlayTimeout={5000}
       >
           {[
               <View style={styles.slide1} key="0">

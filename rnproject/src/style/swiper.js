@@ -61,9 +61,9 @@ export default StyleSheet.create({
     },
     dot: {
         backgroundColor:'rgba(0,0,0,.2)',
-        width: 8,
-        height: 8,
-        borderRadius: 4,
+        width: 4,
+        height: 4,
+        borderRadius: 2,
         marginLeft: 3,
         marginRight: 3,
         marginTop: 3,
