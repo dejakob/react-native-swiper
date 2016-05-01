@@ -105,7 +105,6 @@ class Swiper extends Component
                 if (this.state.draggingState !== DRAGGING_STATE_DRAGGING) {
                     this.refs.viewPager.setPage((this.state.index + 1) % this.props.children.length);
                 }
-                console.log('TICK', (this.state.index + 1) % this.props.children.length);
             }, timeout);
         }
     }
@@ -206,7 +205,6 @@ class Swiper extends Component
 
         return (
             <View
-                pointerEvents="none"
                 style={style}
             >
                 {this.props.dotsHeader}
