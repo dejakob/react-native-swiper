@@ -17,6 +17,18 @@ const DRAGGING_STATE_SETTLING = 'setting';
  */
 class Swiper extends Component
 {
+    static get propTypes () {
+        return {
+            // onPageChange: newPageIndex, oldPageIndex
+            onPageChange: React.PropTypes.func,
+            // onPageChangeDone: newPageIndex
+            onPageChangeDone: React.PropTypes.func,
+
+            dotsHeader: React.PropTypes.object,
+            dotsFooter: React.PropTypes.object
+        }
+    }
+
     constructor () {
         super();
 
@@ -31,14 +43,26 @@ class Swiper extends Component
 
     }
 
+    /**
+     *
+     */
     componentDidMount () {
         this._updateState(this.props);
     }
 
+    /**
+     *
+     * @param newProps
+     */
     componentWillReceiveProps (newProps) {
         this._updateState(newProps);
     }
 
+    /**
+     *
+     * @param props
+     * @private
+     */
     _updateState (props) {
         let newState = {};
 
@@ -59,7 +83,15 @@ class Swiper extends Component
      * @private
      */
     _onPageScroll (eventData) {
-        // console.log('page scroll', eventData);
+        const newIndex = eventData.nativeEvent.position +
+            Math.round(eventData.nativeEvent.offset);
+        this.setState({ index: newIndex });
+
+        if (newIndex !== this.state.index) {
+            if (typeof this.props.onPageChange === 'function') {
+                this.props.onPageChange(newIndex, this.state.index);
+            }
+        }
     }
 
     /**
@@ -79,7 +111,7 @@ class Swiper extends Component
      * @private
      */
     _onPageSelected (eventData) {
-        console.log('page selected', eventData);
+        this.props.onPageChangeDone(this.state.index);
     }
 
     /**
@@ -104,30 +136,24 @@ class Swiper extends Component
     }
 
     _renderDots () {
-        let style = {
+        const style = {
             position: 'absolute',
             bottom: 25,
             left: 0,
             right: 0,
+            backgroundColor: 'transparent'
+        };
+
+        let navStyle = {
             flexDirection: 'row',
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor:'transparent'
+            backgroundColor: 'transparent'
         };
 
         if (this.state.paginationDirection === PAGINATION_DIRECTION_VERTICAL) {
-            style = {
-                position: 'absolute',
-                right: 15,
-                top: 0,
-                bottom: 0,
-                flexDirection: 'column',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor:'transparent'
-            };
+            style.flexDirection = 'column'
         }
 
         return (
@@ -135,7 +161,11 @@ class Swiper extends Component
                 pointerEvents="none"
                 style={style}
             >
-                {this.props.children.map(this._renderDot.bind(this))}
+                {this.props.dotsHeader}
+                <View style={navStyle}>
+                    {this.props.children.map(this._renderDot.bind(this))}
+                </View>
+                {this.props.dotsFooter}
             </View>
         );
     }
