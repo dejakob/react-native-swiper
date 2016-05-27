@@ -2,17 +2,9 @@
  * react-native-swiper
  * @author leecade<leecade@163.com>
  */
-import React, {
-    StyleSheet,
-    Component,
-    Text,
-    View,
-    ScrollView,
-    Dimensions,
-    TouchableOpacity,
-    ViewPagerAndroid,
-    Platform
-} from 'react-native';
+import React, {Component} from "react";
+
+import {StyleSheet, Text, View, ScrollView, Dimensions, TouchableOpacity, ViewPagerAndroid, Platform} from "react-native";
 import STYLE from './style/swiper';
 
 // Using bare setTimeout, setInterval, setImmediate

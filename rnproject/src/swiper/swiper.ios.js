@@ -1,4 +1,5 @@
-import React, { Dimensions, View, ScrollView } from 'react-native';
+import React from "react";
+import {Dimensions, View, ScrollView} from "react-native";
 import SwiperAbstract from './swiper.abstract';
 import STYLE from '../style/swiper';
 import {

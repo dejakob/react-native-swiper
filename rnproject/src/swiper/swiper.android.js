@@ -1,4 +1,5 @@
-import React, { View, ViewPagerAndroid, Dimensions } from 'react-native';
+import React from "react";
+import {View, ViewPagerAndroid, Dimensions} from "react-native";
 import SwiperAbstract from './swiper.abstract';
 import {
     KEYBOARD_DISMISS_MODE_NONE,
