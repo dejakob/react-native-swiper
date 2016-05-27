@@ -4,6 +4,8 @@ This project is based on [http://github.com/leecade/react-native-swiper](leecade
 It does not support every feature of the original lib yet, but it resolves a lot of issues on both Android and iOS.
 It uses the native ViewPagerAndroid for Android and ScrollView for iOS with pagingEnabled.
 
+![Preview](./preview.gif)
+
 ## How to use
 * Install via npm
 ```
@@ -32,5 +34,4 @@ import Carousel from 'tsjing-carousel';
 * Infinite paging (loop)
 * Unit tests
 
-
-![Tsjing logo](http://github.com/dejakob/tsjing-carousel/raw/master/src//tsjing-logo.svg)
+![Tsjing logo](./tsjing-logo.png)
