@@ -73,6 +73,10 @@ class SwiperAbstract extends Component
         this._updateState(newProps);
     }
 
+    componentWillUnmount () {
+        this._stopAutoPlay();
+    }
+
     /**
      *
      * @param props
