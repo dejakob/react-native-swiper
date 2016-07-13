@@ -64,7 +64,7 @@ class SwiperAbstract extends Component
      */
     componentDidMount () {
         if (typeof this.props.index === 'number') {
-          this.state.index = this.props.index;
+          this.state.defaultIndex = this.props.index;
         }
 
         this._updateState(this.props);

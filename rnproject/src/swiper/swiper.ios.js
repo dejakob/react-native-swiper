@@ -86,11 +86,12 @@ class Swiper extends SwiperAbstract
                     ref="viewPager"
                     contentContainerStyle={{}}
                     showsHorizontalScrollIndicator={false}
+                    bounces={false}
                     horizontal={true}
                     pagingEnabled={true}
                     onScroll={this._onPageScroll.bind(this)}
                     scrollEventThrottle={16}
-                    contentOffset={{ x: this.state.index * this.state.width }}
+                    contentOffset={this.state.defaultIndex ? { x: this.state.defaultIndex * this.state.width } : undefined}
                 >
                     {this.props.children.map(this._renderPage.bind(this))}
                 </ScrollView>

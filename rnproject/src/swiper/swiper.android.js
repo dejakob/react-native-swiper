@@ -81,7 +81,7 @@ class Swiper extends SwiperAbstract
                 style={[STYLE.container, { width: this.state.width, height: this.state.height }]}
             >
                 <ViewPagerAndroid
-                    initialPage={this.state.index}
+                    initialPage={this.state.defaultIndex || this.state.index}
                     ref="viewPager"
                     keyboardDismissMode={KEYBOARD_DISMISS_MODE_NONE}
                     onPageScroll={this._onPageScroll.bind(this)}
