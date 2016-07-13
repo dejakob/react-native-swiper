@@ -90,7 +90,7 @@ class Swiper extends SwiperAbstract
                     pagingEnabled={true}
                     onScroll={this._onPageScroll.bind(this)}
                     scrollEventThrottle={16}
-                    contentOffset={{ x: this.state.offset * this.state.width }}
+                    contentOffset={{ x: this.state.index * this.state.width }}
                 >
                     {this.props.children.map(this._renderPage.bind(this))}
                 </ScrollView>
