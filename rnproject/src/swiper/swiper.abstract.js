@@ -184,10 +184,10 @@ class SwiperAbstract extends Component
 
         return (
             <View
-                style={style}
+                style={[style, this.props.dotsStyle]}
             >
                 {this.props.dotsHeader}
-                <View style={[navStyle, this.props.dotsStyle]}>
+                <View style={navStyle}>
                     {this.props.children.map(this._renderDot.bind(this))}
                 </View>
                 {this.props.dotsFooter}
