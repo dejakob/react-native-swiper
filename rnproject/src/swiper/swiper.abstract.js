@@ -187,7 +187,7 @@ class SwiperAbstract extends Component
                 style={style}
             >
                 {this.props.dotsHeader}
-                <View style={this.props.dotsStyle || navStyle}>
+                <View style={[navStyle, this.props.dotsStyle]}>
                     {this.props.children.map(this._renderDot.bind(this))}
                 </View>
                 {this.props.dotsFooter}
