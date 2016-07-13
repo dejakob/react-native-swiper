@@ -36,7 +36,8 @@ class SwiperAbstract extends Component
             activeDotStyle: React.PropTypes.object,
 
             autoPlay: React.PropTypes.bool,
-            autoPlayTimeout: React.PropTypes.number
+            autoPlayTimeout: React.PropTypes.number,
+            index: React.PropTypes.number
         }
     }
 
@@ -62,6 +63,10 @@ class SwiperAbstract extends Component
      * When the Swiper mounted
      */
     componentDidMount () {
+        if (typeof this.props.index === 'number') {
+          this.state.index = this.props.index;
+        }
+
         this._updateState(this.props);
     }
 
