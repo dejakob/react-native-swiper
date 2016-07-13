@@ -28,6 +28,7 @@ import Carousel from 'tsjing-carousel';
 |activeDotStyle|Object|Override styling of an active dot|
 |autoPlay|Boolean|Slide the carousel automatically (false by default)|
 |autoPlayTimeout|Number|Timeout between moving slides for the animation|
+|index|Number|Index of default page to show|
 
 ## To be implemented / Todo
 * Vertical carousel
