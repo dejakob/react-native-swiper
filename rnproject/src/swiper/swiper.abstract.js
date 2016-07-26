@@ -118,7 +118,7 @@ class SwiperAbstract extends Component
      * @protected
      */
     _startAutoPlay (timeout) {
-        if (this._autoPlayInterval === null) {
+        if (this._autoPlayInterval === null && this.props.children.length > 0) {
             this._autoPlayInterval = setInterval(this._onIntervalTick.bind(this), timeout);
         }
     }
