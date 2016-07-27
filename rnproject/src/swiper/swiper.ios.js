@@ -28,7 +28,7 @@ class Swiper extends SwiperAbstract
      */
     _onIntervalTick () {
         if (this.state.draggingState !== DRAGGING_STATE_DRAGGING) {
-            const x = this.state.width * ((this.state.index + 1) % this.props.children.length);
+            const x = this.state.width * ((this.state.index + 1) % this.sizeOfChildren);
 
             this.refs.viewPager.scrollTo({ x });
         }
