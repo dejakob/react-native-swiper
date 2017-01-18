@@ -28,10 +28,13 @@ class Swiper extends SwiperAbstract
      */
     _onIntervalTick () {
         if (this.state.draggingState !== DRAGGING_STATE_DRAGGING) {
-            const x = this.state.width * ((this.state.index + 1) % this.sizeOfChildren);
-
-            this.refs.viewPager.scrollTo({ x });
+            this._setPage(this.state.index + 1)
         }
+    }
+
+    _setPage(index) {
+        const x = this.state.width * ((index) % this.sizeOfChildren);
+        this.viewPager.scrollTo({ x });
     }
 
     /**
@@ -83,7 +86,7 @@ class Swiper extends SwiperAbstract
                 style={[STYLE.container, { width: this.state.width, height: this.state.height }]}
             >
                 <ScrollView
-                    ref="viewPager"
+                    ref={(ref) => {this.viewPager = ref}}
                     contentContainerStyle={{}}
                     showsHorizontalScrollIndicator={false}
                     bounces={false}

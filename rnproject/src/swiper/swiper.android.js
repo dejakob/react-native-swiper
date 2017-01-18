@@ -28,8 +28,12 @@ class Swiper extends SwiperAbstract
      */
     _onIntervalTick () {
         if (this.state.draggingState !== DRAGGING_STATE_DRAGGING) {
-            this.refs.viewPager.setPage((this.state.index + 1) % this.sizeOfChildren);
+          this._setPage(this.state.index + 1)
         }
+    }
+
+    _setPage(index) {
+        this.viewPager.setPage((index) % this.sizeOfChildren);
     }
 
     /**
@@ -82,7 +86,7 @@ class Swiper extends SwiperAbstract
             >
                 <ViewPagerAndroid
                     initialPage={this.state.defaultIndex || this.state.index}
-                    ref="viewPager"
+                    ref={(ref) => {this.viewPager = ref}}
                     keyboardDismissMode={KEYBOARD_DISMISS_MODE_NONE}
                     onPageScroll={this._onPageScroll.bind(this)}
                     onPageScrollStateChanged={this._onPageScrollStateChanged.bind(this)}
