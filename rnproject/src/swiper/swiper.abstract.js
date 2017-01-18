@@ -99,12 +99,7 @@ class SwiperAbstract extends Component
     }
 
     setIndex(index) {
-
         this._setPage(index)
-
-        this.setState({
-          index
-        })
     }
 
     getIndex() {
