@@ -92,6 +92,7 @@ class Swiper extends SwiperAbstract
                     onPageScrollStateChanged={this._onPageScrollStateChanged.bind(this)}
                     onPageSelected={this._onPageSelected.bind(this)}
                     style={STYLE.viewPager}
+                    scrollEnabled={this.props.scrollEnabled}
                 >
                     {this.props.children.map(this._renderPage.bind(this))}
                 </ViewPagerAndroid>

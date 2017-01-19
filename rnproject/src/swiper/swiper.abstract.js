@@ -16,12 +16,8 @@ import {
 
 class SwiperAbstract extends Component
 {
-    /**
-     * propTypes
-     * @returns {Object}
-     */
-    static get propTypes () {
-        return {
+
+    static propTypes = {
             // onPageChange: newPageIndex, oldPageIndex
             onPageChange: React.PropTypes.func,
             // onPageChangeDone: newPageIndex
@@ -37,8 +33,13 @@ class SwiperAbstract extends Component
 
             autoPlay: React.PropTypes.bool,
             autoPlayTimeout: React.PropTypes.number,
-            index: React.PropTypes.number
-        }
+            index: React.PropTypes.number,
+
+            scrollEnabled: React.PropTypes.bool
+    }
+
+    static defaultProps = {
+        scrollEnabled: true
     }
 
     get sizeOfChildren () {

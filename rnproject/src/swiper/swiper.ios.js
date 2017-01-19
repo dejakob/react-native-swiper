@@ -95,6 +95,7 @@ class Swiper extends SwiperAbstract
                     onScroll={this._onPageScroll.bind(this)}
                     scrollEventThrottle={16}
                     contentOffset={this.state.defaultIndex ? { x: this.state.defaultIndex * this.state.width } : undefined}
+                    scrollEnabled={this.props.scrollEnabled}
                 >
                     {this.props.children.map(this._renderPage.bind(this))}
                 </ScrollView>
